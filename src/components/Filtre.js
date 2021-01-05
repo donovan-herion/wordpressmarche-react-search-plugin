@@ -1,5 +1,3 @@
-import React from "react";
-
 function Filtre() {
   return (
     <div class="col-12 col-lg-3 px-0 lg-shadow-sm-1 position-relative z-10">

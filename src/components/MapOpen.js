@@ -1,9 +1,9 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 function MapOpen() {
   return (
-    <div class="col-12 min-height-330px mt-24px mt-lg-0 col-lg-9 px-0 d-flex align-items-stretch justify-content-center overflow-hidden position-relative bg-lighter">
+    <div class="col-12 min-height-330px mt-24px mt-lg-0 col-lg-9 px-0 d-flex align-items-stretch justify-content-stretch overflow-hidden position-relative bg-lighter">
       <MapContainer
-        style={{ width: "100%", height: "100%" }}
+        style={{ width: "100%" }}
         center={[50.22799745011792, 5.34405188915553]}
         zoom={12}
         scrollWheelZoom={false}
