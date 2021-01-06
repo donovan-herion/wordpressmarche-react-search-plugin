@@ -86,6 +86,140 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./node_modules/@babel/runtime/helpers/arrayLikeToArray.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/arrayLikeToArray.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+
+  return arr2;
+}
+
+module.exports = _arrayLikeToArray;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/arrayWithHoles.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/arrayWithHoles.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+module.exports = _arrayWithHoles;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _iterableToArrayLimit(arr, i) {
+  if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+  var _e = undefined;
+
+  try {
+    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+
+module.exports = _iterableToArrayLimit;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/nonIterableRest.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/nonIterableRest.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+module.exports = _nonIterableRest;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/slicedToArray.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/slicedToArray.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayWithHoles = __webpack_require__(/*! ./arrayWithHoles */ "./node_modules/@babel/runtime/helpers/arrayWithHoles.js");
+
+var iterableToArrayLimit = __webpack_require__(/*! ./iterableToArrayLimit */ "./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js");
+
+var unsupportedIterableToArray = __webpack_require__(/*! ./unsupportedIterableToArray */ "./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js");
+
+var nonIterableRest = __webpack_require__(/*! ./nonIterableRest */ "./node_modules/@babel/runtime/helpers/nonIterableRest.js");
+
+function _slicedToArray(arr, i) {
+  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
+}
+
+module.exports = _slicedToArray;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js":
+/*!***************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayLikeToArray = __webpack_require__(/*! ./arrayLikeToArray */ "./node_modules/@babel/runtime/helpers/arrayLikeToArray.js");
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
+}
+
+module.exports = _unsupportedIterableToArray;
+
+/***/ }),
+
 /***/ "./node_modules/@react-leaflet/core/esm/attribution.js":
 /*!*************************************************************!*\
   !*** ./node_modules/@react-leaflet/core/esm/attribution.js ***!
@@ -16022,12 +16156,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _MapOpen__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MapOpen */ "./src/components/MapOpen.js");
-/* harmony import */ var _Filtre__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Filtre */ "./src/components/Filtre.js");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _MapOpen__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./MapOpen */ "./src/components/MapOpen.js");
+/* harmony import */ var _Filtre__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Filtre */ "./src/components/Filtre.js");
+
 
 var _wp$element = wp.element,
     useState = _wp$element.useState,
@@ -16037,18 +16174,85 @@ var _wp$element = wp.element,
 
 
 function App() {
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+  var _useState = useState([{
+    name: "Boulangerie",
+    icon: "book",
+    id: 1,
+    list: [{
+      text: "Delhaye",
+      long: 50.23799745011792,
+      lat: 5.33405188915553
+    }, {
+      text: "Poncelet",
+      long: 50.23699745011792,
+      lat: 5.33305188915553
+    }, {
+      text: "Lefevre",
+      long: 50.23599745011792,
+      lat: 5.33205188915553
+    }]
+  }, {
+    name: "Restaurant",
+    id: 2,
+    icon: "flatware",
+    list: [{
+      text: "Le palais d'ete",
+      long: 50.22911792,
+      lat: 5.32505188915553
+    }, {
+      text: "San Marino",
+      long: 50.25399745011792,
+      lat: 5.33305188915553
+    }, {
+      text: "Greta",
+      long: 50.2543745011792,
+      lat: 5.33205188915553
+    }]
+  }, {
+    name: "Administration",
+    id: 3,
+    icon: "umbrella",
+    list: [{
+      text: "Hotel de ville",
+      long: 50.26799745011792,
+      lat: 5.33405188915553
+    }, {
+      text: "CST",
+      long: 50.23739745011792,
+      lat: 5.33305188915553
+    }, {
+      text: "Office du tourisme",
+      long: 50.23599745011792,
+      lat: 5.35405188915553
+    }]
+  }]),
+      _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState, 2),
+      fakeData = _useState2[0],
+      setFakeData = _useState2[1];
+
+  var _useState3 = useState([]),
+      _useState4 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState3, 2),
+      filteredList = _useState4[0],
+      setFilteredList = _useState4[1];
+
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
     class: "bg-white pt-24px px-24px position-relative d-md-flex px-xl-48px mx-xl-n30px justify-content-md-center flex-column"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", {
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("a", {
     href: "index.html",
     class: "button lvl3 align-self-ls-md-start align-self-md-start position-relative right-0 right-hover-12px fs-short-2"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("i", {
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("i", {
     class: "fas fa-angle-left pr-8px d-ls-md-inline pr-md-12px fs-short-2 d-md-inline"
-  }), "Retour \xE0 l'accueil"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h2", {
+  }), "Retour \xE0 l'accueil"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("h2", {
     class: "text-ls-md-left pt-ls-md-8px text-md-left pt-md-8px"
-  }, "Carte dynamique"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+  }, "Carte dynamique"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
     class: "mt-48px d-flex flex-column flex-lg-row mx-0 mx-lg-n48px overflow-hidden align-items-lg-stretch mx-xxl-0 xxl-shadow-sm-1"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_Filtre__WEBPACK_IMPORTED_MODULE_3__["default"], null), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_MapOpen__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_Filtre__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    fakeData: fakeData,
+    setFilteredList: setFilteredList
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_MapOpen__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    fakeData: fakeData,
+    filteredList: filteredList
+  })));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
@@ -16068,7 +16272,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 
 
-function Filtre() {
+function Filtre(_ref) {
+  var fakeData = _ref.fakeData,
+      setFilteredList = _ref.setFilteredList;
+
+  var handleClick = function handleClick(event) {
+    var filteredList = fakeData.filter(function (object) {
+      return object.id == event.target.id;
+    });
+    setFilteredList(filteredList[0].list);
+  };
+
+  var handleChange = function handleChange(event) {
+    if (event.target.value == 0) {
+      setFilteredList([]);
+    } else {
+      var filteredList = fakeData.filter(function (object) {
+        return object.id == event.target.value;
+      });
+      setFilteredList(filteredList[0].list);
+    }
+  };
+
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
     class: "col-12 col-lg-3 px-0 lg-shadow-sm-1 position-relative z-10"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
@@ -16076,101 +16301,35 @@ function Filtre() {
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("select", {
     name: "tabs",
     id: "tab-select",
-    class: "fs-short-3 ff-semibold"
+    class: "fs-short-3 ff-semibold",
+    onChange: function onChange(e) {
+      return handleChange(e);
+    }
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("option", {
     value: "0",
     selected: true
-  }, "V\xEAtements"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("option", {
-    value: "1"
-  }, "M\xE9dical"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("option", {
-    value: "2"
-  }, "D\xE9chets"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("option", {
-    value: "3"
-  }, "Bars"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("option", {
-    value: "4"
-  }, "Parking centre-ville"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("option", {
-    value: "5"
-  }, "Restauration"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("option", {
-    value: "6"
-  }, "Gestion de l'eau"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("option", {
-    value: "7"
-  }, "Commune"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("option", {
-    value: "8"
-  }, "Culture"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("option", {
-    value: "9"
-  }, "Biblioth\xE8que"))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("ul", {
+  }, "Choisissez une categorie"), fakeData.map(function (object, i) {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("option", {
+      key: i,
+      value: object.id
+    }, object.name);
+  }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("ul", {
     class: "d-none d-lg-block border-bottom border-default"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("li", {
-    class: "border-top border-default"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", {
-    href: "#",
-    class: "d-flex align-items-center h-45px pl-48px pr-16px text-dark-primary text-hover-primary transition-color icon_custom"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("i", {
-    class: "i-shirt w-22px h-22px mr-16px bg-size-auto"
-  }), "V\xEAtements")), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("li", {
-    class: "border-top border-default"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", {
-    href: "#",
-    class: "d-flex align-items-center h-45px pl-48px pr-16px text-dark-primary text-hover-primary transition-color icon_custom"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("i", {
-    class: "i-medical w-22px h-22px mr-16px bg-size-auto"
-  }), "M\xE9dical")), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("li", {
-    class: "border-top border-default"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", {
-    href: "#",
-    class: "d-flex align-items-center h-45px pl-48px pr-16px text-dark-primary text-hover-primary transition-color icon_custom"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("i", {
-    class: "i-trash w-22px h-22px mr-16px bg-size-auto"
-  }), "D\xE9chets")), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("li", {
-    class: "border-top border-default"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", {
-    href: "#",
-    class: "d-flex align-items-center h-45px pl-48px pr-16px text-dark-primary text-hover-primary transition-color icon_custom"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("i", {
-    class: "i-martini-glass w-22px h-22px mr-16px bg-size-auto"
-  }), "Bars")), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("li", {
-    class: "border-top border-default"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", {
-    href: "#",
-    class: "d-flex align-items-center h-45px pl-48px pr-16px text-dark-primary text-hover-primary transition-color icon_custom"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("i", {
-    class: "i-cart w-22px h-22px mr-16px bg-size-auto"
-  }), "Parking centre-ville")), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("li", {
-    class: "border-top border-default"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", {
-    href: "#",
-    class: "d-flex align-items-center h-45px pl-48px pr-16px text-dark-primary text-hover-primary transition-color icon_custom"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("i", {
-    class: "i-flatware w-22px h-22px mr-16px bg-size-auto"
-  }), "Restauration")), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("li", {
-    class: "border-top border-default"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", {
-    href: "#",
-    class: "d-flex align-items-center h-45px pl-48px pr-16px text-dark-primary text-hover-primary transition-color icon_custom"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("i", {
-    class: "i-water-drop w-22px h-22px mr-16px bg-size-auto"
-  }), "Gestion de l'eau")), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("li", {
-    class: "border-top border-default"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", {
-    href: "#",
-    class: "d-flex align-items-center h-45px pl-48px pr-16px text-dark-primary text-hover-primary transition-color icon_custom"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("i", {
-    class: "i-umbrella w-22px h-22px mr-16px bg-size-auto"
-  }), "Commune")), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("li", {
-    class: "border-top border-default"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", {
-    href: "#",
-    class: "d-flex align-items-center h-45px pl-48px pr-16px text-dark-primary text-hover-primary transition-color icon_custom"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("i", {
-    class: "i-disk w-22px h-22px mr-16px bg-size-auto"
-  }), "Culture")), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("li", {
-    class: "border-top border-default"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", {
-    href: "#",
-    class: "d-flex align-items-center h-45px pl-48px pr-16px text-dark-primary text-hover-primary transition-color icon_custom"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("i", {
-    class: "i-book w-22px h-22px mr-16px bg-size-auto"
-  }), "Biblioth\xE8que"))));
+  }, fakeData.map(function (object, i) {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("li", {
+      class: "border-top border-default",
+      key: i
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", {
+      id: object.id,
+      onClick: function onClick(e) {
+        return handleClick(e);
+      },
+      href: "#",
+      class: "d-flex align-items-center h-45px pl-48px pr-16px text-dark-primary text-hover-primary transition-color icon_custom"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("i", {
+      class: "i-".concat(object.icon, " w-22px h-22px mr-16px bg-size-auto")
+    }), object.name));
+  })));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Filtre);
@@ -16192,7 +16351,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function MapOpen() {
+function MapOpen(_ref) {
+  var fakeData = _ref.fakeData,
+      filteredList = _ref.filteredList;
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
     class: "col-12 min-height-330px mt-24px mt-lg-0 col-lg-9 px-0 d-flex align-items-stretch justify-content-stretch overflow-hidden position-relative bg-lighter"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_leaflet__WEBPACK_IMPORTED_MODULE_1__["MapContainer"], {
@@ -16205,25 +16366,16 @@ function MapOpen() {
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_leaflet__WEBPACK_IMPORTED_MODULE_1__["TileLayer"], {
     attribution: "\xA9 <a href=\"http://osm.org/copyright\">OpenStreetMap</a> contributors",
     url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_leaflet__WEBPACK_IMPORTED_MODULE_1__["Marker"], {
-    position: [50.22799745011792, 5.34405188915553]
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_leaflet__WEBPACK_IMPORTED_MODULE_1__["Popup"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", {
-    style: {
-      fontSize: "1rem !important"
-    }
-  }, " text hier"))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_leaflet__WEBPACK_IMPORTED_MODULE_1__["Marker"], {
-    position: [50.24799745011792, 5.35405188915553]
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_leaflet__WEBPACK_IMPORTED_MODULE_1__["Popup"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", {
-    style: {
-      fontSize: "1rem !important"
-    }
-  }, " text hier"))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_leaflet__WEBPACK_IMPORTED_MODULE_1__["Marker"], {
-    position: [50.23799745011792, 5.33405188915553]
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_leaflet__WEBPACK_IMPORTED_MODULE_1__["Popup"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", {
-    style: {
-      fontSize: "1rem !important"
-    }
-  }, " text hier")))));
+  }), filteredList === null || filteredList === void 0 ? void 0 : filteredList.map(function (object, index) {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_leaflet__WEBPACK_IMPORTED_MODULE_1__["Marker"], {
+      key: index,
+      position: [object.long, object.lat]
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_leaflet__WEBPACK_IMPORTED_MODULE_1__["Popup"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", {
+      style: {
+        fontSize: "1rem !important"
+      }
+    }, object.text)));
+  })));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (MapOpen);
