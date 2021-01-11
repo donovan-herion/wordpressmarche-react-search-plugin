@@ -1,4 +1,4 @@
-# React Category Plugin
+# React Map Plugin
 
 This plugin provides a map with its filters that runs on a single page.
 
