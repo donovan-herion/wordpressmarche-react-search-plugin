@@ -16,7 +16,7 @@ function MapOpen({ fakeData, filteredList }) {
           return (
             <Marker key={index} position={[object.long, object.lat]}>
               <Popup>
-                <p style={{ fontSize: "1rem !important" }}>{object.text}</p>
+                <p style={{ fontSize: "1.5rem !important" }}>{object.text}</p>
               </Popup>
             </Marker>
           );
