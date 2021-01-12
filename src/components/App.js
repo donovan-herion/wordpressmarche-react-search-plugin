@@ -67,7 +67,7 @@ function App() {
       <div class="mt-48px d-flex flex-column flex-lg-row mx-0 mx-lg-n48px overflow-hidden align-items-lg-stretch mx-xxl-0 xxl-shadow-sm-1">
         <Filtre fakeData={fakeData} setFilteredList={setFilteredList} />
 
-        <MapOpen fakeData={fakeData} filteredList={filteredList} />
+        <MapOpen filteredList={filteredList} />
       </div>
     </div>
   );

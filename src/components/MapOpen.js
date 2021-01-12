@@ -1,4 +1,6 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import FlyToMyPositionButton from "./FlyToMyPositionButton";
+
 function MapOpen({ fakeData, filteredList }) {
   return (
     <div class="col-12 min-height-330px mt-24px mt-lg-0 col-lg-9 px-0 d-flex align-items-stretch justify-content-stretch overflow-hidden position-relative bg-lighter">
@@ -21,7 +23,9 @@ function MapOpen({ fakeData, filteredList }) {
             </Marker>
           );
         })}
+        <FlyToMyPositionButton />
       </MapContainer>
+      <br /> <br />
     </div>
   );
 }

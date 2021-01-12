@@ -16250,7 +16250,6 @@ function App() {
     fakeData: fakeData,
     setFilteredList: setFilteredList
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_MapOpen__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    fakeData: fakeData,
     filteredList: filteredList
   })));
 }
@@ -16336,6 +16335,69 @@ function Filtre(_ref) {
 
 /***/ }),
 
+/***/ "./src/components/FlyToMyPositionButton.js":
+/*!*************************************************!*\
+  !*** ./src/components/FlyToMyPositionButton.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _hooks_useGeolocation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../hooks/useGeolocation */ "./src/hooks/useGeolocation.js");
+/* harmony import */ var react_leaflet__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-leaflet */ "./node_modules/react-leaflet/esm/index.js");
+
+
+
+
+
+function FlyToMyPositionButton() {
+  var location = Object(_hooks_useGeolocation__WEBPACK_IMPORTED_MODULE_2__["default"])();
+  var map = Object(react_leaflet__WEBPACK_IMPORTED_MODULE_3__["useMap"])();
+
+  var showMyLocation = function showMyLocation() {
+    if (location.loaded && !location.error) {
+      map.flyTo([location.coordinates.lat, location.coordinates.lng], map.getZoom());
+    } else {
+      alert(location.error.message);
+    }
+  };
+
+  if (location.loaded && !location.error) {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("button", {
+      style: {
+        backgroundColor: "black",
+        outline: "none",
+        border: "none",
+        width: "fit-content",
+        height: 25,
+        position: "absolute",
+        color: "white",
+        borderRadius: 10,
+        fontWeight: "bold",
+        top: 15,
+        right: 15,
+        zIndex: 500
+      },
+      onClick: function onClick() {
+        return showMyLocation();
+      }
+    }, "Ma position"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_leaflet__WEBPACK_IMPORTED_MODULE_3__["Marker"], {
+      position: [location.coordinates.lat, location.coordinates.lng]
+    }));
+  } else {
+    return null;
+  }
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (FlyToMyPositionButton);
+
+/***/ }),
+
 /***/ "./src/components/MapOpen.js":
 /*!***********************************!*\
   !*** ./src/components/MapOpen.js ***!
@@ -16348,6 +16410,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_leaflet__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-leaflet */ "./node_modules/react-leaflet/esm/index.js");
+/* harmony import */ var _FlyToMyPositionButton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FlyToMyPositionButton */ "./src/components/FlyToMyPositionButton.js");
+
 
 
 
@@ -16375,10 +16439,73 @@ function MapOpen(_ref) {
         fontSize: "1.5rem !important"
       }
     }, object.text)));
-  })));
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_FlyToMyPositionButton__WEBPACK_IMPORTED_MODULE_2__["default"], null)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("br", null), " ", Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("br", null));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (MapOpen);
+
+/***/ }),
+
+/***/ "./src/hooks/useGeolocation.js":
+/*!*************************************!*\
+  !*** ./src/hooks/useGeolocation.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+
+ //THIS HOOK ASKS FOR THE GEOLOCATION OF THE END USER THROUGH THE BROWSER SETTINGS
+// IF TRUE RETURNS A LOCATION
+
+var useGeolocation = function useGeolocation() {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({
+    loaded: false,
+    coordinates: {
+      lat: "",
+      lng: ""
+    }
+  }),
+      _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState, 2),
+      location = _useState2[0],
+      setLocation = _useState2[1];
+
+  var onSuccess = function onSuccess(location) {
+    setLocation({
+      loaded: true,
+      coordinates: {
+        lat: location.coords.latitude,
+        lng: location.coords.longitude
+      }
+    });
+  };
+
+  var onError = function onError(location) {
+    setLocation({
+      loaded: true,
+      error: error
+    });
+  };
+
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    if (!("geolocation" in navigator)) {
+      onError({
+        code: 0,
+        message: "Geolocalisation non disponible"
+      });
+    }
+
+    navigator.geolocation.getCurrentPosition(onSuccess, onError);
+  }, []);
+  return location;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (useGeolocation);
 
 /***/ }),
 
