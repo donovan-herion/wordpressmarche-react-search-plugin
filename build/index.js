@@ -16372,7 +16372,7 @@ function MapOpen(_ref) {
       position: [object.long, object.lat]
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_leaflet__WEBPACK_IMPORTED_MODULE_1__["Popup"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", {
       style: {
-        fontSize: "1rem !important"
+        fontSize: "1.5rem !important"
       }
     }, object.text)));
   })));

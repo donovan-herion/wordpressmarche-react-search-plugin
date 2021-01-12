@@ -1,3 +1,9 @@
+!!!! this stylesheet has to be enqueued somewhere I put it in the header at the moment which isn't the best option
+
+```bash
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+```
+
 # React Map Plugin
 
 This plugin provides a map with its filters that runs on a single page.
@@ -27,7 +33,7 @@ require_once WPMU_PLUGIN_DIR . '/react-map-plugin/react-map-plugin.php';
 ```php
 get_header();
 
-echo do_shortcode('[react_category_plugin]');
+echo do_shortcode('[react_map_plugin]');
 
 get_footer();
 ```
