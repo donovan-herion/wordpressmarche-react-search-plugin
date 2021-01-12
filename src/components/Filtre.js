@@ -1,4 +1,27 @@
-function Filtre({ fakeData, setFilteredList }) {
+import Axios from "axios";
+
+const { useState, useEffect } = wp.element;
+
+function Filtre({ fakeData, setFakeData, setFilteredList }) {
+  const [parentCategoryId, setParentCategoryId] = useState([414, 21]); //this line needs to be automated
+  const getFichesByParentCategoryId = () => {
+    parentCategoryId.map((elem, i) => {
+      return Axios.get(`https://new.marche.be/wp-json/ca/v1/map/${elem}`)
+        .then((res) => {
+          if (res.data.length == 0) {
+            //transformation et ajout de la categorie parente
+            let formattedData = res.data.map(
+              (fiche, (i) => (fiche.parentCategory = elem))
+            );
+            setFakeData((state) => [...state, formattedData]);
+          } else {
+            setFakeData(null);
+          }
+        })
+        .catch((err) => console.log(err.message));
+    });
+  };
+
   const handleClick = (event) => {
     let filteredList = fakeData.filter((object) => {
       return object.id == event.target.id;
