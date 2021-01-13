@@ -1,79 +1,57 @@
-import Axios from "axios";
-
-const { useState, useEffect } = wp.element;
-
-function Filtre({ fakeData, setFakeData, setFilteredList }) {
-  const [parentCategoryId, setParentCategoryId] = useState([414, 21]); //this line needs to be automated
-  const getFichesByParentCategoryId = () => {
-    parentCategoryId.map((elem, i) => {
-      return Axios.get(`https://new.marche.be/wp-json/ca/v1/map/${elem}`)
-        .then((res) => {
-          if (res.data.length == 0) {
-            //transformation et ajout de la categorie parente
-            let formattedData = res.data.map(
-              (fiche, (i) => (fiche.parentCategory = elem))
-            );
-            setFakeData((state) => [...state, formattedData]);
-          } else {
-            setFakeData(null);
-          }
-        })
-        .catch((err) => console.log(err.message));
-    });
-  };
-
+function Filtre({ categoriesToDisplay, data, setFilteredData }) {
   const handleClick = (event) => {
-    let filteredList = fakeData.filter((object) => {
-      return object.id == event.target.id;
+    let filteredData = data.filter((object) => {
+      return object.ParentCategoryId == event.target.id;
     });
-    setFilteredList(filteredList[0].list);
+    // console.log(filteredData);
+    setFilteredData(filteredData);
   };
   const handleChange = (event) => {
     if (event.target.value == 0) {
-      setFilteredList([]);
+      setFilteredData([]);
     } else {
-      let filteredList = fakeData.filter((object) => {
-        return object.id == event.target.value;
+      let filteredData = data.filter((object) => {
+        return object.ParentCategoryId == event.target.value;
       });
-      setFilteredList(filteredList[0].list);
+      setFilteredData(filteredData);
     }
   };
   return (
-    <div class="col-12 col-lg-3 px-0 lg-shadow-sm-1 position-relative z-10">
-      <div class="d-block d-lg-none pr-12px border border-dark-primary">
+    <div className="col-12 col-lg-3 px-0 lg-shadow-sm-1 position-relative z-10">
+      <div className="d-block d-lg-none pr-12px border border-dark-primary">
         <select
           name="tabs"
           id="tab-select"
-          class="fs-short-3 ff-semibold"
+          className="fs-short-3 ff-semibold"
           onChange={(e) => handleChange(e)}
         >
           <option value="0" selected>
             Choisissez une categorie
           </option>
-          {fakeData.map((object, i) => {
+          {categoriesToDisplay?.map((object, i) => {
             return (
-              <option key={i} value={object.id}>
-                {object.name}
+              <option key={i} value={object.ParentCategoryId}>
+                {object.ParentCategoryName}
               </option>
             );
           })}
         </select>
       </div>
 
-      <ul class="d-none d-lg-block border-bottom border-default">
-        {fakeData.map((object, i) => {
+      <ul className="d-none d-lg-block border-bottom border-default">
+        {categoriesToDisplay?.map((object, i) => {
           return (
-            <li class="border-top border-default" key={i}>
+            <li className="border-top border-default" key={i}>
               <a
-                id={object.id}
+                id={object.ParentCategoryId}
                 onClick={(e) => handleClick(e)}
                 href="#"
-                class="d-flex align-items-center h-45px pl-48px pr-16px text-dark-primary text-hover-primary transition-color icon_custom"
+                className="d-flex align-items-center h-45px pl-48px pr-16px text-dark-primary text-hover-primary transition-color icon_custom"
               >
-                <i
-                  class={`i-${object.icon} w-22px h-22px mr-16px bg-size-auto`}
-                ></i>
-                {object.name}
+                {/* <i
+                  className={`i-${object.icon} w-22px h-22px mr-16px bg-size-auto`}
+                ></i> */}
+                {object.ParentCategoryName}
               </a>
             </li>
           );

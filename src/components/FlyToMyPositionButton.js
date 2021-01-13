@@ -40,6 +40,11 @@ function FlyToMyPositionButton() {
           Ma position
         </button>
         <Marker
+          icon={L.icon({
+            iconUrl:
+              "https://i.pinimg.com/originals/e9/85/b8/e985b822d867f21b3fd20ae7a81f6760.png",
+            iconSize: [50, 50],
+          })}
           position={[location.coordinates.lat, location.coordinates.lng]}
         ></Marker>
       </>
