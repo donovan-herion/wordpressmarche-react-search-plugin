@@ -1,11 +1,15 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import FlyToMyPositionButton from "./FlyToMyPositionButton";
 
-function MapComponent({ data, filteredData }) {
+function MapComponent({ data, filteredData, setPopupDescription }) {
+  const handleClick = (object) => {
+    setPopupDescription(object);
+  };
+
   return (
     <div className="col-12 min-height-330px mt-24px mt-lg-0 col-lg-9 px-0 d-flex align-items-stretch justify-content-stretch overflow-hidden position-relative bg-lighter">
       <MapContainer
-        style={{ width: "100%" }}
+        style={{ width: "100%", height: "800px" }}
         center={[50.22799745011792, 5.34405188915553]}
         zoom={13}
         scrollWheelZoom={false}
@@ -16,13 +20,15 @@ function MapComponent({ data, filteredData }) {
         />
         {filteredData?.map((object, index) => {
           return (
-            <Marker key={index} position={[object.latitude, object.longitude]}>
-              <Popup>
-                <p style={{ fontSize: "1.5rem !important" }}>
-                  {object.societe}
-                </p>
-              </Popup>
-            </Marker>
+            <Marker
+              eventHandlers={{
+                click: () => {
+                  handleClick(object);
+                },
+              }}
+              key={index}
+              position={[object.latitude, object.longitude]}
+            ></Marker>
           );
         })}
         <FlyToMyPositionButton />

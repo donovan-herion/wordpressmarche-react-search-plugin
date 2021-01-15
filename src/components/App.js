@@ -10,6 +10,7 @@ function App() {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState();
   const [categoriesToDisplay, setCategoriesToDisplay] = useState();
+  const [popupDescription, setPopupDescription] = useState();
 
   //defining categories to display || Expecting Parent Category Bottin Id + Name to display
   useEffect(() => {
@@ -69,13 +70,18 @@ function App() {
       <Top />
       <div className="mt-48px d-flex flex-column flex-lg-row mx-0 mx-lg-n48px overflow-hidden align-items-lg-stretch mx-xxl-0 xxl-shadow-sm-1">
         <Filtre
+          setPopupDescription={setPopupDescription}
+          popupDescription={popupDescription}
           categoriesToDisplay={categoriesToDisplay}
           data={data}
           setData={setData}
           setFilteredData={setFilteredData}
         />
 
-        <MapComponent filteredData={filteredData} />
+        <MapComponent
+          setPopupDescription={setPopupDescription}
+          filteredData={filteredData}
+        />
       </div>
     </div>
   );
