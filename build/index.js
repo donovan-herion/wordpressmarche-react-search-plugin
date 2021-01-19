@@ -18283,69 +18283,65 @@ var _wp$element = wp.element,
 function App() {
   var _useState = useState([]),
       _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default()(_useState, 2),
-      data = _useState2[0],
-      setData = _useState2[1];
+      markerData = _useState2[0],
+      setMarkerData = _useState2[1];
 
-  var _useState3 = useState(),
+  var _useState3 = useState([]),
       _useState4 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default()(_useState3, 2),
-      filteredData = _useState4[0],
-      setFilteredData = _useState4[1];
+      categoriesToDisplay = _useState4[0],
+      setCategoriesToDisplay = _useState4[1];
 
-  var _useState5 = useState(),
+  var _useState5 = useState([]),
       _useState6 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default()(_useState5, 2),
-      categoriesToDisplay = _useState6[0],
-      setCategoriesToDisplay = _useState6[1];
+      parentCategoriesToDisplay = _useState6[0],
+      setParentCategoriesToDisplay = _useState6[1];
 
   var _useState7 = useState(),
       _useState8 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default()(_useState7, 2),
       popupDescription = _useState8[0],
-      setPopupDescription = _useState8[1]; //defining categories to display || Expecting Parent Category Bottin Id + Name to display
-
+      setPopupDescription = _useState8[1];
 
   useEffect(function () {
-    var categoriesToDisplay = [{
-      ParentCategoryId: 414,
-      ParentCategoryName: "Maison de repos"
+    var parentCategoriesToDisplay = [{
+      ParentCategoryId: 490,
+      ParentCategoryName: "Emploi - Formation"
     }, {
-      ParentCategoryId: 113,
-      ParentCategoryName: "Restaurant"
+      ParentCategoryId: 104,
+      ParentCategoryName: "Horeca"
     }, {
-      ParentCategoryId: 386,
-      ParentCategoryName: "Logopede"
-    }, {
-      ParentCategoryId: 248,
-      ParentCategoryName: "Agence Interim"
+      ParentCategoryId: 494,
+      ParentCategoryName: "Famille"
     }];
-    setCategoriesToDisplay(categoriesToDisplay);
-  }, []); // const [parentCategoryId, setParentCategoryId] = useState([414, 21]); //this line needs to be automated
-  //Fetching Data
+    setParentCategoriesToDisplay(parentCategoriesToDisplay);
+  }, []); //Fetching CategoriesToDisplay
 
-  var getFichesByParentCategoryId = function getFichesByParentCategoryId() {
-    categoriesToDisplay === null || categoriesToDisplay === void 0 ? void 0 : categoriesToDisplay.map(function (category, index) {
-      axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("https://new.marche.be/wp-json/ca/v1/map/".concat(category.ParentCategoryId)).then(function (res) {
-        if (res.data.length !== 0) {
-          //transformation et ajout de la categorie parente
-          var formattedData = res.data;
-          formattedData.map(function (data, i) {
-            data.ParentCategoryId = category.ParentCategoryId;
-          });
-          setData(function (state) {
-            return [].concat(_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default()(state), _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default()(formattedData));
-          });
-        } else {
-          return null;
-        }
-      }).catch(function (err) {
-        return console.log(err.message);
-      });
+  var getCategoryToDisplay = function getCategoryToDisplay() {
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("https://new.marche.be/wp-json/ca/v1/bottinAllCategories").then(function (res) {
+      if (res.data.length !== 0) {
+        var allCategories = res.data;
+        var filteredCategories = [];
+        parentCategoriesToDisplay.forEach(function (parent) {
+          filteredCategories.push.apply(filteredCategories, _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0___default()(allCategories.filter(function (cat) {
+            return cat.parent_id == parent.ParentCategoryId;
+          })));
+        });
+        console.log("4444444", filteredCategories);
+        setCategoriesToDisplay(filteredCategories);
+      } else {
+        return null;
+      }
+    }).catch(function (err) {
+      return console.log(err.message);
     });
   };
 
-  console.log(data);
   useEffect(function () {
-    getFichesByParentCategoryId();
-  }, [categoriesToDisplay]);
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+    getCategoryToDisplay();
+  }, [parentCategoriesToDisplay]);
+  window.addEventListener("resize", function () {
+    window.innerWidth > 950 && window.innerWidth < 992 ? window.location.reload() : null;
+  });
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
     className: "bg-white pt-24px px-24px position-relative d-md-flex px-xl-48px mx-xl-n30px justify-content-md-center flex-column"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_Top__WEBPACK_IMPORTED_MODULE_7__["default"], null), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
     className: "mt-48px d-flex flex-column flex-lg-row mx-0 mx-lg-n48px overflow-hidden align-items-lg-stretch mx-xxl-0 xxl-shadow-sm-1"
@@ -18353,16 +18349,113 @@ function App() {
     setPopupDescription: setPopupDescription,
     popupDescription: popupDescription,
     categoriesToDisplay: categoriesToDisplay,
-    data: data,
-    setData: setData,
-    setFilteredData: setFilteredData
+    markerData: markerData,
+    setMarkerData: setMarkerData,
+    parentCategoriesToDisplay: parentCategoriesToDisplay
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_MapComponent__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    popupDescription: popupDescription,
     setPopupDescription: setPopupDescription,
-    filteredData: filteredData
-  })));
+    markerData: markerData
+  }))));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
+
+/***/ }),
+
+/***/ "./src/components/CollapseCategory.js":
+/*!********************************************!*\
+  !*** ./src/components/CollapseCategory.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+function CollapseCategory(_ref) {
+  var parentCategoryObject = _ref.parentCategoryObject,
+      categoriesToDisplay = _ref.categoriesToDisplay,
+      setMarkerData = _ref.setMarkerData,
+      targetControlIdCollapse = _ref.targetControlIdCollapse;
+
+  var scrollToMapIfMobile = function scrollToMapIfMobile() {
+    console.log(window.innerWidth);
+
+    if (window.innerWidth < 1000) {
+      var mapPosition = document.querySelector(".leaflet-container").getBoundingClientRect().bottom;
+      console.log(mapPosition);
+      window.scroll({
+        top: mapPosition,
+        left: 0,
+        behavior: "smooth"
+      });
+    }
+  };
+
+  var handleClick = function handleClick(event) {
+    scrollToMapIfMobile();
+    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("https://new.marche.be/wp-json/ca/v1/map/".concat(event.target.id)).then(function (res) {
+      if (res.data.length !== 0) {
+        setMarkerData(res.data);
+      } else {
+        return setMarkerData(null);
+      }
+    }).catch(function (err) {
+      return console.log(err.message);
+    });
+  };
+
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+    className: "accordion",
+    id: "accordionExample"
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+    className: "card bg-white"
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+    className: "card-header bg-white",
+    id: "headingOne"
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h2", {
+    className: "mb-0"
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("button", {
+    className: "btn btn-block text-left text-dark-primary shadow-none",
+    type: "button",
+    "data-toggle": "collapse",
+    "data-target": "#".concat(targetControlIdCollapse),
+    "aria-expanded": "false",
+    "aria-controls": targetControlIdCollapse
+  }, parentCategoryObject === null || parentCategoryObject === void 0 ? void 0 : parentCategoryObject.ParentCategoryName))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+    id: targetControlIdCollapse,
+    className: "collapse",
+    "aria-labelledby": "headingOne",
+    "data-parent": "#accordionExample"
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+    className: "card-body p-0 pl-3"
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("ul", null, categoriesToDisplay === null || categoriesToDisplay === void 0 ? void 0 : categoriesToDisplay.filter(function (cat) {
+    return cat.parent_id == parentCategoryObject.ParentCategoryId;
+  }).map(function (object, i) {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("li", {
+      className: "border-top",
+      key: i
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", {
+      id: object.id,
+      style: {
+        cursor: "pointer"
+      },
+      onClick: function onClick(e) {
+        return handleClick(e);
+      },
+      className: "d-flex align-items-center p-16px text-dark-primary text-hover-primary transition-color icon_custom"
+    }, object.name));
+  }))))));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (CollapseCategory);
 
 /***/ }),
 
@@ -18377,8 +18470,7 @@ function App() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! leaflet */ "./node_modules/leaflet/dist/leaflet-src.js");
-/* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(leaflet__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _CollapseCategory__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CollapseCategory */ "./src/components/CollapseCategory.js");
 /* harmony import */ var _PopupDescription__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PopupDescription */ "./src/components/PopupDescription.js");
 
 
@@ -18388,63 +18480,25 @@ function Filtre(_ref) {
   var setPopupDescription = _ref.setPopupDescription,
       popupDescription = _ref.popupDescription,
       categoriesToDisplay = _ref.categoriesToDisplay,
-      data = _ref.data,
-      setFilteredData = _ref.setFilteredData;
-
-  var handleClick = function handleClick(event) {
-    var filteredData = data.filter(function (object) {
-      return object.ParentCategoryId == event.target.id;
-    }); // console.log(filteredData);
-
-    setFilteredData(filteredData);
-  };
-
-  var handleChange = function handleChange(event) {
-    if (event.target.value == 0) {
-      setFilteredData([]);
-    } else {
-      var filteredData = data.filter(function (object) {
-        return object.ParentCategoryId == event.target.value;
-      });
-      setFilteredData(filteredData);
-    }
-  };
-
+      setCategoriesToDisplay = _ref.setCategoriesToDisplay,
+      markerData = _ref.markerData,
+      setMarkerData = _ref.setMarkerData,
+      parentCategoriesToDisplay = _ref.parentCategoriesToDisplay;
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
     className: "col-12 col-lg-3 px-0 lg-shadow-sm-1 position-relative z-10"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-    className: "d-block d-lg-none pr-12px border border-dark-primary"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("select", {
-    name: "tabs",
-    id: "tab-select",
-    className: "fs-short-3 ff-semibold",
-    onChange: function onChange(e) {
-      return handleChange(e);
-    }
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("option", {
-    value: "0",
-    selected: true
-  }, "Choisissez une categorie"), categoriesToDisplay === null || categoriesToDisplay === void 0 ? void 0 : categoriesToDisplay.map(function (object, i) {
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("option", {
-      key: i,
-      value: object.ParentCategoryId
-    }, object.ParentCategoryName);
-  }))), popupDescription ? Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_PopupDescription__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, popupDescription && window.innerWidth > 992 ? Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_PopupDescription__WEBPACK_IMPORTED_MODULE_2__["default"], {
     setPopupDescription: setPopupDescription,
     popupDescription: popupDescription
-  }) : Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("ul", {
-    className: "d-none d-lg-block border-bottom border-default"
-  }, categoriesToDisplay === null || categoriesToDisplay === void 0 ? void 0 : categoriesToDisplay.map(function (object, i) {
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("li", {
-      className: "border-top border-default",
-      key: i
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", {
-      id: object.ParentCategoryId,
-      onClick: function onClick(e) {
-        return handleClick(e);
-      },
-      className: "d-flex align-items-center h-45px pl-48px pr-16px text-dark-primary text-hover-primary transition-color icon_custom"
-    }, object.ParentCategoryName));
+  }) : Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null, parentCategoriesToDisplay === null || parentCategoriesToDisplay === void 0 ? void 0 : parentCategoriesToDisplay.map(function (parentCategoryObject, index) {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_CollapseCategory__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      setMarkerData: setMarkerData,
+      key: index,
+      parentCategoryObject: parentCategoryObject,
+      categoriesToDisplay: categoriesToDisplay,
+      setCategoriesToDisplay: setCategoriesToDisplay,
+      markerData: markerData,
+      targetControlIdCollapse: "Collapse".concat(index)
+    });
   })));
 }
 
@@ -18463,18 +18517,15 @@ function Filtre(_ref) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _hooks_useGeolocation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../hooks/useGeolocation */ "./src/hooks/useGeolocation.js");
-/* harmony import */ var react_leaflet__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-leaflet */ "./node_modules/react-leaflet/esm/index.js");
-
+/* harmony import */ var _hooks_useGeolocation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../hooks/useGeolocation */ "./src/hooks/useGeolocation.js");
+/* harmony import */ var react_leaflet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-leaflet */ "./node_modules/react-leaflet/esm/index.js");
 
 
 
 
 function FlyToMyPositionButton() {
-  var location = Object(_hooks_useGeolocation__WEBPACK_IMPORTED_MODULE_2__["default"])();
-  var map = Object(react_leaflet__WEBPACK_IMPORTED_MODULE_3__["useMap"])();
+  var location = Object(_hooks_useGeolocation__WEBPACK_IMPORTED_MODULE_1__["default"])();
+  var map = Object(react_leaflet__WEBPACK_IMPORTED_MODULE_2__["useMap"])();
 
   var showMyLocation = function showMyLocation() {
     if (location.loaded && !location.error) {
@@ -18485,27 +18536,39 @@ function FlyToMyPositionButton() {
   };
 
   if (location.loaded && !location.error) {
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("button", {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      onClick: function onClick() {
+        return showMyLocation();
+      },
+      style: {
+        backgroundColor: "#fff",
+        position: "absolute",
+        border: "solid 2px rgba(0,0,0,0.4)",
+        cursor: "pointer",
+        borderRadius: 3,
+        display: "flex",
+        justifyContent: "center",
+        width: 30,
+        top: 80,
+        left: 12,
+        zIndex: 500
+      }
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("img", {
+      style: {
+        width: 40
+      },
+      src: "https://static.thenounproject.com/png/1836810-200.png"
+    })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("button", {
       style: {
         backgroundColor: "black",
         outline: "none",
         border: "none",
         width: "fit-content",
-        height: 25,
-        position: "absolute",
-        color: "white",
-        borderRadius: 10,
-        fontWeight: "bold",
-        top: 15,
-        right: 15,
-        zIndex: 500
-      },
-      onClick: function onClick() {
-        return showMyLocation();
+        height: 25
       }
-    }, "Ma position"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_leaflet__WEBPACK_IMPORTED_MODULE_3__["Marker"], {
+    }, "Ma position"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_leaflet__WEBPACK_IMPORTED_MODULE_2__["Marker"], {
       icon: L.icon({
-        iconUrl: "https://i.pinimg.com/originals/e9/85/b8/e985b822d867f21b3fd20ae7a81f6760.png",
+        iconUrl: "https://static.thenounproject.com/png/1836810-200.png",
         iconSize: [50, 50]
       }),
       position: [location.coordinates.lat, location.coordinates.lng]
@@ -18537,8 +18600,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function MapComponent(_ref) {
-  var data = _ref.data,
-      filteredData = _ref.filteredData,
+  var markerData = _ref.markerData,
+      popupDescription = _ref.popupDescription,
       setPopupDescription = _ref.setPopupDescription;
 
   var handleClick = function handleClick(object) {
@@ -18546,11 +18609,11 @@ function MapComponent(_ref) {
   };
 
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-    className: "col-12 min-height-330px mt-24px mt-lg-0 col-lg-9 px-0 d-flex align-items-stretch justify-content-stretch overflow-hidden position-relative bg-lighter"
+    className: "col-12 min-height-330px mt-24px mb-24px mt-lg-0 col-lg-9 px-0 d-flex position-relative bg-lighter"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_leaflet__WEBPACK_IMPORTED_MODULE_1__["MapContainer"], {
     style: {
       width: "100%",
-      height: "800px"
+      height: "700px"
     },
     center: [50.22799745011792, 5.34405188915553],
     zoom: 13,
@@ -18558,7 +18621,7 @@ function MapComponent(_ref) {
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_leaflet__WEBPACK_IMPORTED_MODULE_1__["TileLayer"], {
     attribution: "\xA9 <a href=\"http://osm.org/copyright\">OpenStreetMap</a> contributors",
     url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-  }), filteredData === null || filteredData === void 0 ? void 0 : filteredData.map(function (object, index) {
+  }), markerData === null || markerData === void 0 ? void 0 : markerData.map(function (object, index) {
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_leaflet__WEBPACK_IMPORTED_MODULE_1__["Marker"], {
       eventHandlers: {
         click: function click() {
@@ -18567,8 +18630,12 @@ function MapComponent(_ref) {
       },
       key: index,
       position: [object.latitude, object.longitude]
-    });
-  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_FlyToMyPositionButton__WEBPACK_IMPORTED_MODULE_2__["default"], null)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("br", null), " ", Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("br", null));
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_leaflet__WEBPACK_IMPORTED_MODULE_1__["Popup"], {
+      className: "d-block d-lg-none"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h3", null, popupDescription === null || popupDescription === void 0 ? void 0 : popupDescription.societe), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", {
+      className: "text-center"
+    }, popupDescription === null || popupDescription === void 0 ? void 0 : popupDescription.telephone)));
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_FlyToMyPositionButton__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (MapComponent);
@@ -18586,12 +18653,6 @@ function MapComponent(_ref) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! leaflet */ "./node_modules/leaflet/dist/leaflet-src.js");
-/* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(leaflet__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-
-
 
 
 function PopupDescription(_ref) {
@@ -18600,13 +18661,21 @@ function PopupDescription(_ref) {
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("ul", {
     className: "d-none d-lg-block border-default m-5"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("li", {
-    className: " border-default "
+    className: "border-default"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("button", {
-    className: "mb-5 btn btn-outline-primary btn-sm",
+    className: "mb-3 badge badge-secondary",
     onClick: function onClick() {
       return setPopupDescription(null);
     }
-  }, "Retour a la navigation"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h3", null, popupDescription.societe), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("br", null), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null, popupDescription.comment1)));
+  }, "Retour a la navigation"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h3", {
+    className: "text-dark-primary"
+  }, popupDescription.societe), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("br", null), popupDescription.comment1 ? Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", {
+    className: "text-dark-primary"
+  }, popupDescription.comment1.slice(0, 150).concat("...")) : null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", {
+    className: "btn btn-link text-dark-primary btn-sm mt-3",
+    target: "_blank",
+    href: "https://www.google.com/maps/search/?api=1&query=".concat(popupDescription.latitude, ",").concat(popupDescription.longitude)
+  }, "Itineraire")));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (PopupDescription);

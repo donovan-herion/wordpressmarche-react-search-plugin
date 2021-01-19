@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import useGeolocation from "../hooks/useGeolocation";
 import { Marker, useMap } from "react-leaflet";
 
@@ -20,6 +19,27 @@ function FlyToMyPositionButton() {
   if (location.loaded && !location.error) {
     return (
       <>
+        <div
+          onClick={() => showMyLocation()}
+          style={{
+            backgroundColor: "#fff",
+            position: "absolute",
+            border: "solid 2px rgba(0,0,0,0.4)",
+            cursor: "pointer",
+            borderRadius: 3,
+            display: "flex",
+            justifyContent: "center",
+            width: 30,
+            top: 80,
+            left: 12,
+            zIndex: 500,
+          }}
+        >
+          <img
+            style={{ width: 40 }}
+            src="https://static.thenounproject.com/png/1836810-200.png"
+          />
+        </div>
         <button
           style={{
             backgroundColor: "black",
@@ -27,22 +47,13 @@ function FlyToMyPositionButton() {
             border: "none",
             width: "fit-content",
             height: 25,
-            position: "absolute",
-            color: "white",
-            borderRadius: 10,
-            fontWeight: "bold",
-            top: 15,
-            right: 15,
-            zIndex: 500,
           }}
-          onClick={() => showMyLocation()}
         >
           Ma position
         </button>
         <Marker
           icon={L.icon({
-            iconUrl:
-              "https://i.pinimg.com/originals/e9/85/b8/e985b822d867f21b3fd20ae7a81f6760.png",
+            iconUrl: "https://static.thenounproject.com/png/1836810-200.png",
             iconSize: [50, 50],
           })}
           position={[location.coordinates.lat, location.coordinates.lng]}
