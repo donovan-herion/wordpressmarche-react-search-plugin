@@ -9,6 +9,7 @@ defined('ABSPATH') || die();
 
 function react_map_plugin()
 {
+    wp_enqueue_script("fontawesomeMap", "https://kit.fontawesome.com/346aed29e3.js", [], "4", true);
     wp_enqueue_script('boostrap4-jquery', 'https://code.jquery.com/jquery-3.5.1.slim.min.js', [], '4.5.0', true);
     wp_enqueue_script('boostrap4-js', 'https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js', [], '4.5.0', true);
     wp_enqueue_script('react_map_plugin', plugins_url('build/index.js', __FILE__), ['wp-element'], time(), true);

@@ -18304,13 +18304,16 @@ function App() {
   useEffect(function () {
     var parentCategoriesToDisplay = [{
       ParentCategoryId: 490,
-      ParentCategoryName: "Emploi - Formation"
+      ParentCategoryName: "Emploi - Formation",
+      ParentCategoryIcon: "fas fa-briefcase"
     }, {
       ParentCategoryId: 104,
-      ParentCategoryName: "Horeca"
+      ParentCategoryName: "Horeca",
+      ParentCategoryIcon: "fas fa-utensils"
     }, {
       ParentCategoryId: 494,
-      ParentCategoryName: "Famille"
+      ParentCategoryName: "Famille",
+      ParentCategoryIcon: "fas fa-user-friends"
     }];
     setParentCategoriesToDisplay(parentCategoriesToDisplay);
   }, []); //Fetching CategoriesToDisplay
@@ -18429,7 +18432,12 @@ function CollapseCategory(_ref) {
     "data-target": "#".concat(targetControlIdCollapse),
     "aria-expanded": "false",
     "aria-controls": targetControlIdCollapse
-  }, parentCategoryObject === null || parentCategoryObject === void 0 ? void 0 : parentCategoryObject.ParentCategoryName))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("i", {
+    style: {
+      fontSize: "1rem"
+    },
+    class: "".concat(parentCategoryObject === null || parentCategoryObject === void 0 ? void 0 : parentCategoryObject.ParentCategoryIcon, " pr-2")
+  }), parentCategoryObject === null || parentCategoryObject === void 0 ? void 0 : parentCategoryObject.ParentCategoryName))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
     id: targetControlIdCollapse,
     className: "collapse",
     "aria-labelledby": "headingOne",
@@ -18555,9 +18563,9 @@ function FlyToMyPositionButton() {
       }
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("img", {
       style: {
-        width: 40
+        width: 25
       },
-      src: "https://static.thenounproject.com/png/1836810-200.png"
+      src: "https://cdn3.iconfinder.com/data/icons/mix-stroke-5/100/mix_stroke_5_area-512.png"
     })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("button", {
       style: {
         backgroundColor: "black",
@@ -18568,8 +18576,8 @@ function FlyToMyPositionButton() {
       }
     }, "Ma position"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_leaflet__WEBPACK_IMPORTED_MODULE_2__["Marker"], {
       icon: L.icon({
-        iconUrl: "https://static.thenounproject.com/png/1836810-200.png",
-        iconSize: [50, 50]
+        iconUrl: "https://www.ramani.fr/images/location_icon.png",
+        iconSize: [30, 30]
       }),
       position: [location.coordinates.lat, location.coordinates.lng]
     }));
@@ -18609,7 +18617,7 @@ function MapComponent(_ref) {
   };
 
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-    className: "col-12 min-height-330px mt-24px mb-24px mt-lg-0 col-lg-9 px-0 d-flex position-relative bg-lighter"
+    className: "align-self-start col-12 min-height-330px mt-lg-0 col-lg-9 px-0 d-flex position-relative bg-lighter"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_leaflet__WEBPACK_IMPORTED_MODULE_1__["MapContainer"], {
     style: {
       width: "100%",
@@ -18632,9 +18640,17 @@ function MapComponent(_ref) {
       position: [object.latitude, object.longitude]
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_leaflet__WEBPACK_IMPORTED_MODULE_1__["Popup"], {
       className: "d-block d-lg-none"
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h3", null, popupDescription === null || popupDescription === void 0 ? void 0 : popupDescription.societe), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", {
-      className: "text-center"
-    }, popupDescription === null || popupDescription === void 0 ? void 0 : popupDescription.telephone)));
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h3", {
+      className: "mb-3 text-center text-dark-primary"
+    }, popupDescription === null || popupDescription === void 0 ? void 0 : popupDescription.societe), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", {
+      className: "m-0 p-0 text-center text-dark-primary"
+    }, popupDescription === null || popupDescription === void 0 ? void 0 : popupDescription.telephone), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", {
+      className: " m-0 p-0 text-center text-dark-primary"
+    }, popupDescription === null || popupDescription === void 0 ? void 0 : popupDescription.email), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", {
+      href: popupDescription === null || popupDescription === void 0 ? void 0 : popupDescription.website,
+      target: "_blank",
+      className: "m-0 p-0 text-center text-dark-primary d-block"
+    }, popupDescription === null || popupDescription === void 0 ? void 0 : popupDescription.website)));
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_FlyToMyPositionButton__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
 }
 
@@ -18663,7 +18679,11 @@ function PopupDescription(_ref) {
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("li", {
     className: "border-default"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("button", {
-    className: "mb-3 badge badge-secondary",
+    className: "mb-3 p-2 badge text-white ",
+    style: {
+      backgroundColor: "#487f89",
+      border: "none"
+    },
     onClick: function onClick() {
       return setPopupDescription(null);
     }
@@ -18671,8 +18691,15 @@ function PopupDescription(_ref) {
     className: "text-dark-primary"
   }, popupDescription.societe), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("br", null), popupDescription.comment1 ? Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", {
     className: "text-dark-primary"
-  }, popupDescription.comment1.slice(0, 150).concat("...")) : null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", {
-    className: "btn btn-link text-dark-primary btn-sm mt-3",
+  }, popupDescription.comment1.slice(0, 150).concat("...")) : null, popupDescription.website ? Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", {
+    href: popupDescription.website,
+    target: "_blank",
+    style: {
+      wordWrap: "break-word"
+    },
+    className: "text-dark-primary mt-2 d-block"
+  }, popupDescription.website) : null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", {
+    className: "btn text-hover-white text-dark-primary btn-sm mt-3 border-dark-primary",
     target: "_blank",
     href: "https://www.google.com/maps/search/?api=1&query=".concat(popupDescription.latitude, ",").concat(popupDescription.longitude)
   }, "Itineraire")));
@@ -18700,7 +18727,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function Top() {
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", {
-    href: "index.html",
+    href: "https://new.marche.be",
     className: "button lvl3 align-self-ls-md-start align-self-md-start position-relative right-0 right-hover-12px fs-short-2"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("i", {
     className: "fas fa-angle-left pr-8px d-ls-md-inline pr-md-12px fs-short-2 d-md-inline"

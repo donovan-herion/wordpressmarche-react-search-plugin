@@ -36,8 +36,8 @@ function FlyToMyPositionButton() {
           }}
         >
           <img
-            style={{ width: 40 }}
-            src="https://static.thenounproject.com/png/1836810-200.png"
+            style={{ width: 25 }}
+            src="https://cdn3.iconfinder.com/data/icons/mix-stroke-5/100/mix_stroke_5_area-512.png"
           />
         </div>
         <button
@@ -53,8 +53,8 @@ function FlyToMyPositionButton() {
         </button>
         <Marker
           icon={L.icon({
-            iconUrl: "https://static.thenounproject.com/png/1836810-200.png",
-            iconSize: [50, 50],
+            iconUrl: "https://www.ramani.fr/images/location_icon.png",
+            iconSize: [30, 30],
           })}
           position={[location.coordinates.lat, location.coordinates.lng]}
         ></Marker>

@@ -43,6 +43,10 @@ function CollapseCategory({
               aria-expanded="false"
               aria-controls={targetControlIdCollapse}
             >
+              <i
+                style={{ fontSize: "1rem" }}
+                class={`${parentCategoryObject?.ParentCategoryIcon} pr-2`}
+              ></i>
               {parentCategoryObject?.ParentCategoryName}
             </button>
           </h2>

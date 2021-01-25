@@ -19,14 +19,17 @@ function App() {
       {
         ParentCategoryId: 490,
         ParentCategoryName: "Emploi - Formation",
+        ParentCategoryIcon: "fas fa-briefcase",
       },
       {
         ParentCategoryId: 104,
         ParentCategoryName: "Horeca",
+        ParentCategoryIcon: "fas fa-utensils",
       },
       {
         ParentCategoryId: 494,
         ParentCategoryName: "Famille",
+        ParentCategoryIcon: "fas fa-user-friends",
       },
     ];
     setParentCategoriesToDisplay(parentCategoriesToDisplay);
