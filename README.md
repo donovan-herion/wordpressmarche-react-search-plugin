@@ -1,6 +1,6 @@
 # React Search Plugin
 
-This plugin provides an autocompletion that displays keywords in the searchbar.
+This plugin provides an autocompletion that displays keywords in the searchScreen.
 
 ## Installation
 
