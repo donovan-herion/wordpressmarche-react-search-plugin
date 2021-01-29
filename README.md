@@ -1,6 +1,6 @@
 # React Search Plugin
 
-This plugin provides an autocompletion plugin that displays keywords in the searchbar.
+This plugin provides an autocompletion that displays keywords in the searchbar.
 
 ## Installation
 
@@ -20,14 +20,4 @@ call the plugin in the load.php file so that it runs on the wordpress site by de
 
 ```bash
 require_once WPMU_PLUGIN_DIR . '/react-search-plugin/react-search-plugin.php';
-```
-
-## Usage
-
-```php
-get_header();
-
-echo do_shortcode('[react_search_plugin]');
-
-get_footer();
 ```
